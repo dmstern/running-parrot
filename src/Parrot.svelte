@@ -8,9 +8,9 @@
 <div class="me" class:jump class:running use:styles={{jumpDuration: jumpDuration}}>
   <div class="shadow"></div>
   <div class="parrot">
-    <img src="./parrot-leg-left.png" alt="Left Leg" class="parrot__leg parrot__leg--left">
-    <img src="./parrot-leg-right.png" alt="Right Leg" class="parrot__leg parrot__leg--right">
-    <img src="./parrot-without-legs.png" alt="Me" class="parrot__body">
+    <img src="./assets/parrot-leg-left.png" alt="Left Leg" class="parrot__leg parrot__leg--left">
+    <img src="./assets/parrot-leg-right.png" alt="Right Leg" class="parrot__leg parrot__leg--right">
+    <img src="./assets/parrot-without-legs.png" alt="Me" class="parrot__body">
   </div>
 </div>
 

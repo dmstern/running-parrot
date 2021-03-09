@@ -77,7 +77,7 @@
 <style lang="scss">
 
 	.stage {
-		background: url("../minecraft-bg.png");
+		background: url("../assets/minecraft-bg.png");
 		height: 100%;
 		background-repeat: repeat-x;
 		padding: 1em;
@@ -88,7 +88,7 @@
 		max-width: 100%;
 		margin: 0;
 		height: 100%;
-		background: url("../minecraft-cleanstone.jpg");
+		background: url("../assets/minecraft-cleanstone.jpg");
 		position: relative;
 	}
 
