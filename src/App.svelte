@@ -13,6 +13,7 @@
 
 	let jumpKeys = ["ArrowUp", " "];
 	let walkKeys = ["ArrowRight", "w"];
+	let stopKeys = ["Escape"];
 
 	function isWalkInput(e) {
 		return walkKeys.includes(e.key);
@@ -21,16 +22,33 @@
 	function isJumpInput(e) {
 		return jumpKeys.includes(e.key);
 	}
+
+	function isStopInput(e) {
+		return stopKeys.includes(e.key);
+	}
+
+	function startRunning() {
+		interval = setInterval(() => {
+			position += pixelPerMilliSecond;
+		}, 1);
+	}
+
+	function stopRunning() {
+		running = false;
+		clearInterval(interval);
+	}
 	
 	function handleKeydown(e) {
 		if (isWalkInput(e)) {
 			if (!running) {
-				interval = setInterval(() => {
-					position += pixelPerMilliSecond;
-				}, 1)
+				startRunning();
 			}
 
 			running = true
+		}
+
+		if (isStopInput(e)) {
+			stopRunning();
 		}
 
 		if (isJumpInput(e) && !isJumping) {
@@ -47,13 +65,6 @@
 		}
 	}
 
-	function handleKeyup(e) {
-		if (isWalkInput(e)) {
-			running = false;
-			clearInterval(interval);
-		}
-	}
-	
 	function handleLoad() {
 		let main = document.querySelector("#main");
 		main.focus();
@@ -64,7 +75,6 @@
 	id="main"
 	tabindex="0"
 	on:keydown={handleKeydown}
-	on:keyup={handleKeyup}
 	on:mouseenter={handleLoad}
 	style={`background-position-x: ${-position}px`}
 	class:jump
