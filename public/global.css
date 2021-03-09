@@ -59,8 +59,9 @@ input:disabled {
 
 button {
   color: #333;
-  background-color: #f4f4f4;
+  background-color: #c5c5c5;
   outline: none;
+  border-radius: 5px;
 }
 
 button:disabled {

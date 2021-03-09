@@ -15,7 +15,7 @@
   }
 
   .btn-start {
-    width: 100px;
-    line-height: 1.5em;
+    width: 150px;
+    line-height: 2rem;
   }
 </style>
