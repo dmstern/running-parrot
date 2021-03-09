@@ -28,7 +28,15 @@
 		left: 10px;
 		transition: transform 200ms ease;
 	}
+
+	.me.running .parrot__body {
+		transform: rotate(10deg);
+	}
 	
+	.me.jump .parrot__body {
+		transform: rotate(0deg);
+	}
+
 	.me .parrot {
 		width: 80px;
 		height: 140px;
@@ -71,10 +79,6 @@
 		left: 38px;
 	}
 
-	.me.running .parrot__body {
-		transform: rotate(10deg);
-	}
-
 	.me.running .parrot__leg--left {
 		bottom: 29px;
 		left: 43px;
@@ -82,10 +86,6 @@
 	.me.running .parrot__leg--right {
 		bottom: 22px;
 		left: 35px;
-	}
-
-	.me.jump .parrot__body {
-		transform: rotate(0deg);
 	}
 
 	.me.jump .parrot__leg {
