@@ -1,7 +1,9 @@
 <script>
 	import Parrot from "./Parrot.svelte";
 	import Meta from "./Meta.svelte";
+	import Welcome from "./Welcome.svelte";
 
+	let playing = false;
 	let running = false;
 	let position = 0;
 	let pixelPerMilliSecond = 3;
@@ -14,6 +16,11 @@
 	let jumpKeys = ["ArrowUp", " "];
 	let walkKeys = ["ArrowRight", "w"];
 	let stopKeys = ["Escape"];
+
+	function startGame() {
+		playing = true;
+		main.focus();
+	}
 
 	function startRunning() {
 		running = true
@@ -52,26 +59,25 @@
 		}
 	}
 
-	function handleLoad() {
-		let main = document.querySelector("#main");
-		main.focus();
-	}
 </script>
 
 <main
 	id="main"
 	tabindex="0"
 	on:keydown={handleKeydown}
-	on:mouseenter={handleLoad}
 	style={`background-position-x: ${-position}px`}
 	class:jumpState
 	class:running
 	>
-	<div class="stage" style={`background-position-x: ${-position}px`}>
-		<Meta position={position} pixelPerBlock={pixelPerBlock}/>
-		<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
-	</div>
 
+	{#if playing}
+		<div class="stage" style={`background-position-x: ${-position}px`}>
+			<Meta position={position} pixelPerBlock={pixelPerBlock}/>
+			<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
+		</div>
+	{:else}
+		<Welcome startGame={startGame}/>
+	{/if}
 </main>
 
 <style lang="scss">
