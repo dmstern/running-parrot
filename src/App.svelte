@@ -1,5 +1,7 @@
 <script>
-	import { styles } from "./styles.js";
+	import Parrot from "./Parrot.svelte";
+	import Meta from "./Meta.svelte";
+
 	let running = false;
 	let position = 0;
 	let pixelPerMilliSecond = 3;
@@ -69,19 +71,10 @@
 	class:running
 	>
 
-	<div class="meta">
-		<div class="coordinates">Blocks: { Math.round(position / pixelPerBlock) }</div>
-		<div>Score: 0</div>
-	</div>
+	<Meta position={position} pixelPerBlock={pixelPerBlock}/>
 
-	<div class="me" use:styles={{jumpDuration: jumpDuration}}>
-		<div class="shadow"></div>
-		<div class="parrot">
-			<img src="./parrot-leg-left.png" alt="Left Leg" class="parrot__leg parrot__leg--left">
-			<img src="./parrot-leg-right.png" alt="Right Leg" class="parrot__leg parrot__leg--right">
-			<img src="./parrot-without-legs.png" alt="Me" class="parrot__body">
-		</div>
-	</div>
+	<Parrot jumpDuration={jumpDuration} running={running} jump={jump}/>
+
 </main>
 
 <style lang="scss">
@@ -95,105 +88,6 @@
 		background-repeat: repeat-x;
 		position: relative;
 		background-position-y: -100px;
-	}
-	
-	.me {
-		position: absolute;
-		top: 450px;
-		left: 100px;
-	}
-	
-	.me .parrot__body {
-		position: absolute;
-		height: auto;
-		width: 100%;
-		left: 10px;
-		transition: transform 200ms ease;
-	}
-	
-	.me .parrot {
-		width: 80px;
-		height: 140px;
-		transform: translateY(0);
-		transition-property: transform;
-		transition-timing-function: ease;
-		transition-duration: var(--jumpDuration);
-	}
-
-	.jump .me .parrot {
-		transform: translateY(-100%);
-	}
-
-	@keyframes walk {
-		0% {
-			transform: rotate(60deg);
-		}
-
-		100% {
-			transform: rotate(-30deg);
-		}
-	}
-
-	.parrot__leg {
-		position: absolute;
-		height: auto;
-		transform-origin: 50% 0;
-		transition: all 200ms ease;
-	}
-
-	.parrot__leg--left {
-		width: 15px;
-		bottom: 25px;
-		left: 47px;
-	}
-
-	.parrot__leg--right {
-		width: 14px;
-		bottom: 18px;
-		left: 38px;
-	}
-
-	.running .parrot__body {
-		transform: rotate(10deg);
-	}
-
-	.running .parrot__leg--left {
-		bottom: 29px;
-		left: 43px;
-	}
-	.running .parrot__leg--right {
-		bottom: 22px;
-		left: 35px;
-	}
-
-	.jump .parrot__body {
-		transform: rotate(0deg);
-	}
-
-	.jump .parrot__leg {
-		animation: unset;
-	}
-
-	.running .parrot__leg {
-		animation: walk 200ms infinite alternate;
-	}
-
-	.running .parrot__leg--left {
-		animation-delay: 200ms;
-	}
-
-	.shadow {
-		position: absolute;
-		width: 120%;
-		height: 40px;
-		background: rgba(0, 0, 0, 0.2);
-		border-radius: 50%;
-		bottom: 0;
-	}
-
-	.meta {
-		color: #FFFFFF;
-		text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 	}
 
 	@media (min-width: 640px) {
