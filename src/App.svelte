@@ -16,7 +16,7 @@
 
 	let jumpKeys = ["ArrowUp", " "];
 	let walkKeys = ["ArrowRight", "w"];
-	let stopKeys = ["Escape"];
+	let stopKeys = ["Escape", "ArrowLeft"];
 
 	function startGame() {
 		playing = true;
