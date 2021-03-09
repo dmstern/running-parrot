@@ -70,24 +70,29 @@
 	class:jump
 	class:running
 	>
-
-	<Meta position={position} pixelPerBlock={pixelPerBlock}/>
-
-	<Parrot jumpDuration={jumpDuration} running={running} jump={jump}/>
+	<div class="stage" style={`background-position-x: ${-position}px`}>
+		<Meta position={position} pixelPerBlock={pixelPerBlock}/>
+		<Parrot jumpDuration={jumpDuration} running={running} jump={jump}/>
+	</div>
 
 </main>
 
 <style lang="scss">
 
-	main {
-		padding: 1em;
-		max-width: 100%;
-		margin: 0 auto;
-		height: calc(100% - 40px);
+	.stage {
 		background: url("../minecraft-bg.png");
+		height: 100%;
 		background-repeat: repeat-x;
-		position: relative;
+		padding: 1em;
 		background-position-y: -100px;
+	}
+	
+	main {
+		max-width: 100%;
+		margin: 0;
+		height: 100%;
+		background: url("../minecraft-cleanstone.jpg");
+		position: relative;
 	}
 
 	@media (min-width: 640px) {
