@@ -6,7 +6,7 @@
 	let position = 0;
 	let pixelPerMilliSecond = 3;
 	let interval = null;
-	let jump = false;
+	let jumpState = false;
 	let jumpDuration = "400ms";
 	let pixelPerBlock = 200;
 	let isJumping = false;
@@ -15,22 +15,26 @@
 	let walkKeys = ["ArrowRight", "w"];
 	let stopKeys = ["Escape"];
 
-	function isWalkInput(e) {
-		return walkKeys.includes(e.key);
-	}
-
-	function isJumpInput(e) {
-		return jumpKeys.includes(e.key);
-	}
-
-	function isStopInput(e) {
-		return stopKeys.includes(e.key);
-	}
-
 	function startRunning() {
+		running = true
 		interval = setInterval(() => {
 			position += pixelPerMilliSecond;
 		}, 1);
+	}
+
+	function dip() {
+		jumpState = false;
+
+		setTimeout(() => {
+			isJumping = false;
+		}, Number.parseInt(jumpDuration, 10) - 100);
+	}
+
+	function jump () {
+		jumpState = true;
+		isJumping = true;
+
+		setTimeout(dip, Number.parseInt(jumpDuration, 10))
 	}
 
 	function stopRunning() {
@@ -39,29 +43,12 @@
 	}
 	
 	function handleKeydown(e) {
-		if (isWalkInput(e)) {
-			if (!running) {
-				startRunning();
-			}
-
-			running = true
-		}
-
-		if (isStopInput(e)) {
+		if (walkKeys.includes(e.key) && !running) {
+			startRunning();
+		} else if (jumpKeys.includes(e.key) && !isJumping) {
+			jump();
+		} else if (stopKeys.includes(e.key)) {
 			stopRunning();
-		}
-
-		if (isJumpInput(e) && !isJumping) {
-			jump = true;
-			isJumping = true;
-
-			setTimeout(() => {
-				jump = false;
-
-				setTimeout(() => {
-					isJumping = false;
-				}, Number.parseInt(jumpDuration, 10) - 100);
-			}, Number.parseInt(jumpDuration, 10))
 		}
 	}
 
@@ -77,12 +64,12 @@
 	on:keydown={handleKeydown}
 	on:mouseenter={handleLoad}
 	style={`background-position-x: ${-position}px`}
-	class:jump
+	class:jumpState
 	class:running
 	>
 	<div class="stage" style={`background-position-x: ${-position}px`}>
 		<Meta position={position} pixelPerBlock={pixelPerBlock}/>
-		<Parrot jumpDuration={jumpDuration} running={running} jump={jump}/>
+		<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
 	</div>
 
 </main>
