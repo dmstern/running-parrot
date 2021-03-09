@@ -1,4 +1,5 @@
 <script>
+	import { fly } from "svelte/transition";
 	import Parrot from "./Parrot.svelte";
 	import Meta from "./Meta.svelte";
 	import Welcome from "./Welcome.svelte";
@@ -71,7 +72,7 @@
 	>
 
 	{#if playing}
-		<div class="stage" style={`background-position-x: ${-position}px`}>
+		<div class="stage" style={`background-position-x: ${-position}px`} in:fly="{{ y: -200, duration: 2000 }}">
 			<Meta position={position} pixelPerBlock={pixelPerBlock}/>
 			<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
 		</div>
