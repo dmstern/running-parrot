@@ -76,10 +76,6 @@
 	function triggerJump(e) {
 		e.preventDefault();
 
-		if (!playing) {
-			return;
-		}
-
 		if (!running) {
 			startRunning();
 		}
