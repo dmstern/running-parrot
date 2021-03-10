@@ -20,6 +20,12 @@
 		top: 450px;
 		left: 100px;
 	}
+
+	@media screen and (max-width: 600px) {
+		.me {
+			left: 30px;
+		}
+	}
 	
 	.me .parrot__body {
 		position: absolute;
