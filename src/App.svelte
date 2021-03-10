@@ -1,5 +1,5 @@
 <script>
-	import { fly } from "svelte/transition";
+	import { fly, blur } from "svelte/transition";
 	import Parrot from "./Parrot.svelte";
 	import Meta from "./Meta.svelte";
 	import Welcome from "./Welcome.svelte";
@@ -9,6 +9,7 @@
 	let fps = 60;
 	let playing = false;
 	let running = false;
+	let gameActive = false;
 	let position = 0;
 	let pixelPerFrame = 10;
 	let interval = null;
@@ -33,6 +34,7 @@
 
 		setTimeout(() => {
 			stage.focus();
+			gameActive = true;
 		}, startGameAnimationDuration);
 	}
 
@@ -99,6 +101,7 @@
 			id="stage"
 			tabindex="0"
 			class="stage"
+			class:gameActive
 			style={`background-position-x: ${-position}px; background-image:url(${worldBG})`}
 			in:fly="{{ y: -200, duration: startGameAnimationDuration }}"
 			on:keydown={handleKeydown}
@@ -107,6 +110,9 @@
 			<Meta position={position} pixelPerBlock={pixelPerBlock}/>
 			<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
 		</div>
+		{#if !gameActive}
+			<div class="help" transition:blur>Press ["w"] or [🠕] to jump and run</div>
+		{/if}
 		<PauseButton handleClick={stopRunning}/>
 	{:else}
 		<Welcome loadGame={loadGame}/>
@@ -120,6 +126,22 @@
 		background-repeat: repeat-x;
 		padding: 1em;
 		background-position-y: -100px;
+		filter: blur(3px) brightness(0.7);
+		transition: blur 2000ms ease;
+	}
+	
+	.help {
+		width: 100%;
+		color: white;
+		position: absolute;
+		top: 200px;
+		font-size: 2rem;
+		filter: none;
+		text-align: center;
+	}
+
+	.stage.gameActive {
+		filter: none;
 	}
 	
 	main {
