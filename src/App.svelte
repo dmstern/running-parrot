@@ -4,6 +4,7 @@
 	import Meta from "./Meta.svelte";
 	import Welcome from "./Welcome.svelte";
 	import Loading from "./Loading.svelte";
+	import PauseButton from "./PauseButton.svelte";
 
 	let playing = false;
 	let running = false;
@@ -27,7 +28,10 @@
 	function startGame() {
 		loading = false;
 		playing = true;
-		main.focus();
+
+		setTimeout(() => {
+			stage.focus();
+		}, 2000);
 	}
 
 	function startRunning() {
@@ -86,10 +90,6 @@
 </script>
 
 <main
-	id="main"
-	tabindex="0"
-	on:keydown={handleKeydown}
-	on:click={triggerJump}
 	style={`background-position-x: ${-position}px`}
 	class:jumpState
 	class:running
@@ -97,10 +97,19 @@
 	{#if loading}
 		<Loading startGame={startGame} worldBG={worldBG}/>
 	{:else if playing}
-		<div class="stage" style={`background-position-x: ${-position}px; background-image:url(${worldBG})`} in:fly="{{ y: -200, duration: 2000 }}">
+		<div
+			id="stage"
+			tabindex="0"
+			class="stage"
+			style={`background-position-x: ${-position}px; background-image:url(${worldBG})`}
+			in:fly="{{ y: -200, duration: 2000 }}"
+			on:keydown={handleKeydown}
+			on:click={triggerJump}
+		>
 			<Meta position={position} pixelPerBlock={pixelPerBlock}/>
 			<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
 		</div>
+		<PauseButton handleClick={stopRunning}/>
 	{:else}
 		<Welcome loadGame={loadGame}/>
 	{/if}
