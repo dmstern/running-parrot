@@ -10,8 +10,8 @@
 
 button {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 10px;
+    top: 10px;
     background: transparent;
     border: none;
     width: 3rem;
