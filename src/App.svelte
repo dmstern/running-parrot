@@ -17,7 +17,6 @@
 	let loading = false;
 
 	let jumpKeys = ["ArrowUp", " "];
-	let walkKeys = ["ArrowRight", "w"];
 	let stopKeys = ["Escape", "ArrowLeft"];
 
 	function loadGame() {
@@ -58,19 +57,23 @@
 	}
 	
 	function handleKeydown(e) {
-		if (walkKeys.includes(e.key) && !running) {
-			startRunning();
-		} else if (jumpKeys.includes(e.key) && !isJumping) {
-			jump();
+		e.preventDefault();
+
+		if (jumpKeys.includes(e.key)) {
+			triggerJump(e);
 		} else if (stopKeys.includes(e.key)) {
 			stopRunning();
 		}
 	}
 
-	function handleClick(e) {
+	function triggerJump(e) {
 		e.preventDefault();
 
-		if (!running && playing) {
+		if (!playing) {
+			return;
+		}
+
+		if (!running) {
 			startRunning();
 		}
 
@@ -85,7 +88,7 @@
 	id="main"
 	tabindex="0"
 	on:keydown={handleKeydown}
-	on:click={handleClick}
+	on:click={triggerJump}
 	style={`background-position-x: ${-position}px`}
 	class:jumpState
 	class:running
