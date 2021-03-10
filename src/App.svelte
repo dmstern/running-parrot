@@ -94,8 +94,7 @@
 	class:running
 	>
 	{#if loading}
-		<Loading/>
-		<img src="../assets/minecraft-bg.png" alt="" on:load={startGame} style="display:none">
+		<Loading startGame={startGame}/>
 	{:else if playing}
 		<div class="stage" style={`background-position-x: ${-position}px`} in:fly="{{ y: -200, duration: 2000 }}">
 			<Meta position={position} pixelPerBlock={pixelPerBlock}/>
