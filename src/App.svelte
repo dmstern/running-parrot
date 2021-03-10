@@ -67,12 +67,25 @@
 		}
 	}
 
+	function handleClick(e) {
+		e.preventDefault();
+
+		if (!running && playing) {
+			startRunning();
+		}
+
+		if (!isJumping) {
+			jump();
+		}
+	}
+
 </script>
 
 <main
 	id="main"
 	tabindex="0"
 	on:keydown={handleKeydown}
+	on:click={handleClick}
 	style={`background-position-x: ${-position}px`}
 	class:jumpState
 	class:running
