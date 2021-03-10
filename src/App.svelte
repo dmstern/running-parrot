@@ -15,6 +15,7 @@
 	let pixelPerBlock = 200;
 	let isJumping = false;
 	let loading = false;
+	let worldBG = "../assets/minecraft-bg.png";
 
 	let jumpKeys = ["ArrowUp", " "];
 	let stopKeys = ["Escape", "ArrowLeft"];
@@ -94,9 +95,9 @@
 	class:running
 	>
 	{#if loading}
-		<Loading startGame={startGame}/>
+		<Loading startGame={startGame} worldBG={worldBG}/>
 	{:else if playing}
-		<div class="stage" style={`background-position-x: ${-position}px`} in:fly="{{ y: -200, duration: 2000 }}">
+		<div class="stage" style={`background-position-x: ${-position}px; background-image:url(${worldBG})`} in:fly="{{ y: -200, duration: 2000 }}">
 			<Meta position={position} pixelPerBlock={pixelPerBlock}/>
 			<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
 		</div>
@@ -108,7 +109,6 @@
 <style lang="scss">
 
 	.stage {
-		background: url("../assets/minecraft-bg.png");
 		height: 100%;
 		background-repeat: repeat-x;
 		padding: 1em;

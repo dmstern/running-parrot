@@ -1,12 +1,13 @@
 <script>
   import { blur } from "svelte/transition";
   export let startGame;
+  export let worldBG;
 </script>
 
 <div class="loading" in:blur>
   <img class="loading__img" src="../assets/loading.svg" alt="Loading">
   <span class="loading__text">Loading...</span>
-  <img src="../assets/minecraft-bg.png" alt="" on:load={startGame} style="display:none">
+  <img src={worldBG} alt="" on:load={startGame} style="display:none">
 </div>
 
 <style>
