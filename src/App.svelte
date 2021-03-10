@@ -6,10 +6,11 @@
 	import Loading from "./Loading.svelte";
 	import PauseButton from "./PauseButton.svelte";
 
+	let fps = 60;
 	let playing = false;
 	let running = false;
 	let position = 0;
-	let pixelPerMilliSecond = 3;
+	let pixelPerFrame = 10;
 	let interval = null;
 	let jumpState = false;
 	let jumpDuration = "400ms";
@@ -37,8 +38,8 @@
 	function startRunning() {
 		running = true
 		interval = setInterval(() => {
-			position += pixelPerMilliSecond;
-		}, 1);
+			position += pixelPerFrame;
+		}, 1000 / fps);
 	}
 
 	function dip() {
