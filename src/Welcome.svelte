@@ -1,21 +1,24 @@
 <script>
-  export let startGame;
+  import { blur } from "svelte/transition";
+  export let loadGame;
 </script>
 
-<div class="welcome-screen">
-  <button class="btn-start" on:click={startGame}>Play</button>
+<div class="welcome-screen" out:blur>
+  <button class="btn-start" on:click={loadGame}>Play</button>
 </div>
 
 <style>
   .welcome-screen {
-    width: 400px;
+    position: absolute;
     height: 300px;
-    margin: 0 auto;
-    padding-top: 200px;
+    width: 100%;
+		padding-top: 200px;
+    display: flex;
+    justify-content: center;
   }
 
   .btn-start {
     width: 150px;
-    line-height: 2rem;
+    font-size: 2rem;
   }
 </style>

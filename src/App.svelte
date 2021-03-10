@@ -3,6 +3,7 @@
 	import Parrot from "./Parrot.svelte";
 	import Meta from "./Meta.svelte";
 	import Welcome from "./Welcome.svelte";
+	import Loading from "./Loading.svelte";
 
 	let playing = false;
 	let running = false;
@@ -13,13 +14,18 @@
 	let jumpDuration = "400ms";
 	let pixelPerBlock = 200;
 	let isJumping = false;
+	let loading = false;
 
 	let jumpKeys = ["ArrowUp", " "];
 	let walkKeys = ["ArrowRight", "w"];
 	let stopKeys = ["Escape", "ArrowLeft"];
 
+	function loadGame() {
+		loading = true;
+	}
+	
 	function startGame() {
-		playing = true;
+		loading = false;
 		main.focus();
 	}
 
@@ -70,14 +76,16 @@
 	class:jumpState
 	class:running
 	>
-
-	{#if playing}
+	{#if loading}
+		<Loading/>
+	{:else if playing}
 		<div class="stage" style={`background-position-x: ${-position}px`} in:fly="{{ y: -200, duration: 2000 }}">
+			<img src="../assets/minecraft-bg.png" alt="" on:load={startGame} style="visibility: hidden">
 			<Meta position={position} pixelPerBlock={pixelPerBlock}/>
 			<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
 		</div>
 	{:else}
-		<Welcome startGame={startGame}/>
+		<Welcome loadGame={loadGame}/>
 	{/if}
 </main>
 
