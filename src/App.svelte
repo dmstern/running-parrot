@@ -26,6 +26,7 @@
 	
 	function startGame() {
 		loading = false;
+		playing = true;
 		main.focus();
 	}
 
@@ -78,9 +79,9 @@
 	>
 	{#if loading}
 		<Loading/>
+		<img src="../assets/minecraft-bg.png" alt="" on:load={startGame} style="display:none">
 	{:else if playing}
 		<div class="stage" style={`background-position-x: ${-position}px`} in:fly="{{ y: -200, duration: 2000 }}">
-			<img src="../assets/minecraft-bg.png" alt="" on:load={startGame} style="visibility: hidden">
 			<Meta position={position} pixelPerBlock={pixelPerBlock}/>
 			<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
 		</div>
