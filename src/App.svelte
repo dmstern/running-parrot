@@ -18,6 +18,7 @@
 	let isJumping = false;
 	let loading = false;
 	let worldBG = "../assets/minecraft-bg.png";
+	let startGameAnimationDuration = 2000;
 
 	let jumpKeys = ["ArrowUp", " "];
 	let stopKeys = ["Escape", "ArrowLeft"];
@@ -32,7 +33,7 @@
 
 		setTimeout(() => {
 			stage.focus();
-		}, 2000);
+		}, startGameAnimationDuration);
 	}
 
 	function startRunning() {
@@ -103,7 +104,7 @@
 			tabindex="0"
 			class="stage"
 			style={`background-position-x: ${-position}px; background-image:url(${worldBG})`}
-			in:fly="{{ y: -200, duration: 2000 }}"
+			in:fly="{{ y: -200, duration: startGameAnimationDuration }}"
 			on:keydown={handleKeydown}
 			on:click={triggerJump}
 		>
