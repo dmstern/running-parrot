@@ -94,9 +94,9 @@
 </script>
 
 <main
-	style={`background-position-x: ${-position}px`}
 	class:jumpState
 	class:running
+	class:gameActive
 	>
 	{#if loading}
 		<Loading startGame={startGame} worldBG={worldBG}/>
@@ -105,8 +105,7 @@
 			id="stage"
 			tabindex="0"
 			class="stage"
-			class:gameActive
-			style={`background-position-x: ${-position}px; background-image:url(${worldBG})`}
+			style={`background-image:url(${worldBG})`}
 			in:fly="{{ y: -200, duration: startGameAnimationDuration }}"
 			on:keydown={handleKeydown}
 			on:click={triggerJump}
@@ -137,6 +136,28 @@
 		transition: blur 2000ms ease;
 	}
 	
+	.gameActive .stage {
+		filter: none;
+	}
+
+	main.running.gameActive,
+	.running.gameActive .stage {
+		animation-name: walk;
+		animation-timing-function: linear;
+		animation-duration: 6s;
+		animation-iteration-count: infinite;
+	}
+
+	@keyframes walk {
+		from {
+			background-position-x: 0;
+		}
+
+		to {
+			background-position-x: -3840px;
+		}
+	}
+
 	.help {
 		width: 100%;
 		color: white;
@@ -145,10 +166,6 @@
 		font-size: 2rem;
 		filter: none;
 		text-align: center;
-	}
-
-	.stage.gameActive {
-		filter: none;
 	}
 	
 	main {
