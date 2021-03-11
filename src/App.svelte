@@ -138,7 +138,7 @@
 		padding: 1em;
 		background-position-y: -100px;
 		filter: blur(3px) brightness(0.7);
-		transition: blur 2000ms ease;
+		transition: filter 2000ms ease;
 	}
 	
 	.gameActive .stage {

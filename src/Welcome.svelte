@@ -11,7 +11,7 @@
   export let position;
 </script>
 
-<div class="welcome-screen" transition:fly={{y: -500, duration: 1000}}>
+<div class="welcome-screen" in:fly={{y: -500, duration: 1000, delay: 1000}} out:fly={{y: -500, duration: 1000}}>
   {#if loading}
     <Loading startGame={startGame} worldBG={worldBG}/>
   {:else}
