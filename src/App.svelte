@@ -126,7 +126,7 @@
 	{/if}
 		<PauseButton handleClick={pause}/>
 	{#if !playing}
-		<Welcome loadGame={loadGame} loading={loading} startGame={startGame} worldBG={worldBG}/>
+		<Welcome loadGame={loadGame} loading={loading} startGame={startGame} worldBG={worldBG} position={position} pixelPerBlock={pixelPerBlock}/>
 	{/if}
 </main>
 

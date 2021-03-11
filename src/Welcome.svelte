@@ -7,6 +7,8 @@
   export let loading = false;
   export let startGame;
   export let worldBG;
+  export let pixelPerBlock;
+  export let position;
 </script>
 
 <div class="welcome-screen" transition:fly={{y: -500, duration: 1000}}>
@@ -16,7 +18,7 @@
     <div class="welcome-screen__main" out:blur={{duration:1000}}>
       <h1>Running Parrot</h1>
       <div class="meta">
-        <Meta/>
+        <Meta position={position} pixelPerBlock={pixelPerBlock}/>
       </div>
       <Parrot staticPosition={true}/>
       <button class="btn-start" on:click={loadGame}>Play</button>
