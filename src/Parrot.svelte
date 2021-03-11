@@ -27,6 +27,12 @@
 		left: 100px;
 	}
 
+	@media screen and (max-height: 600px) {
+		.me {
+			top: 50%;
+		}
+	}
+
 	.me.staticPosition {
 		position: static;
 	}

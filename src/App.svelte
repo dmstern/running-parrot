@@ -140,6 +140,12 @@
 		filter: blur(3px) brightness(0.7);
 		transition: filter 2000ms ease;
 	}
+
+	@media screen and (max-height: 600px) {
+		.stage {
+			background-position-y: 50%;
+		}
+	}
 	
 	.gameActive .stage {
 		filter: none;
