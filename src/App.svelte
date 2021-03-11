@@ -115,7 +115,7 @@
 		<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState} visible={gameActive}/>
 	</div>
 	{#if playing && !gameActive}
-		<div class="help" transition:blur>
+		<div class="help" transition:blur={{duration:500}}>
 			{#if isTouchDevice()}
 				Touch on the screen to jump and run
 			{:else}
