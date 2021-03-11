@@ -4,6 +4,7 @@
 	import Meta from "./Meta.svelte";
 	import Welcome from "./Welcome.svelte";
 	import PauseButton from "./PauseButton.svelte";
+	import LoadingAnimation from "./LoadingAnimation.svelte";
 
 	let fps = 60;
 	let playing = false;
@@ -116,6 +117,7 @@
 	</div>
 	{#if playing && !gameActive}
 		<div class="help" transition:blur={{duration:500}}>
+			<LoadingAnimation />
 			{#if isTouchDevice()}
 				Touch on the screen to jump and run
 			{:else}
