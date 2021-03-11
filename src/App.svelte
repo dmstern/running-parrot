@@ -139,12 +139,19 @@
 		filter: none;
 	}
 
-	main.running.gameActive,
-	.running.gameActive .stage {
+	main,
+	.stage {
 		animation-name: walk;
 		animation-timing-function: linear;
 		animation-duration: 6s;
 		animation-iteration-count: infinite;
+		animation-fill-mode: forwards;
+		animation-play-state: paused;
+	}
+	
+	main.running.gameActive,
+	.running.gameActive .stage {
+		animation-play-state: running;
 	}
 
 	@keyframes walk {
