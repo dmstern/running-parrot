@@ -65,6 +65,12 @@ button {
   transition: transform 200ms ease;
 }
 
+button svg {
+  height: 1.2em;
+  width: auto;
+  margin-right: 0.5em;
+}
+
 button:disabled {
   color: #999;
 }
