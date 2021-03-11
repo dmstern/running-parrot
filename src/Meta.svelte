@@ -1,6 +1,6 @@
 <script>
-  export let position;
-  export let pixelPerBlock;
+  export let position = 0;
+  export let pixelPerBlock = 1;
 </script>
 
 <div class="meta">

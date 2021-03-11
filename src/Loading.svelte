@@ -4,7 +4,7 @@
   export let worldBG;
 </script>
 
-<div class="loading" in:blur>
+<div class="loading" in:blur={{duration:1000}}>
   <div class="loading__animation">
     <div></div>
     <div></div>

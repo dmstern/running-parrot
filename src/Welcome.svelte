@@ -2,6 +2,7 @@
   import { fly, blur } from "svelte/transition";
   import Loading from "./Loading.svelte";
   import Parrot from "./Parrot.svelte";
+  import Meta from "./Meta.svelte";
   export let loadGame;
   export let loading = false;
   export let startGame;
@@ -10,11 +11,16 @@
 
 <div class="welcome-screen" transition:fly={{y: -500, duration: 1000}}>
   {#if loading}
-  <Loading startGame={startGame} worldBG={worldBG}/>
+    <Loading startGame={startGame} worldBG={worldBG}/>
   {:else}
-    <h1 out:blur>Running Parrot</h1>
-    <Parrot staticPosition={true}/>
-    <button out:blur class="btn-start" on:click={loadGame}>Play</button>
+    <div class="welcome-screen__main" out:blur={{duration:1000}}>
+      <h1>Running Parrot</h1>
+      <div class="meta">
+        <Meta/>
+      </div>
+      <Parrot staticPosition={true}/>
+      <button class="btn-start" on:click={loadGame}>Play</button>
+    </div>
   {/if}
 </div>
 
@@ -36,9 +42,22 @@
     opacity: 0.9;
   }
 
+  .meta {
+    padding: 20px;
+  }
+
   .btn-start {
     width: 150px;
     height: 60px;
     font-size: 1.5rem;
   }
+
+  .welcome-screen__main {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: space-between;
+    align-items: center;
+  }
+
 </style>
