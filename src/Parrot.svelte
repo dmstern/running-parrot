@@ -1,17 +1,23 @@
 <script>
-	import { styles } from "./styles.js";
+	import { fly } from "svelte/transition";
 	export let jumpDuration;
 	export let jump = false;
 	export let running = false;
+	export let visible = true;
+	export let staticPosition;
 </script>
 
-<div class="me" class:jump class:running use:styles={{jumpDuration: jumpDuration}}>
-  <div class="shadow"></div>
-  <div class="parrot">
-    <img src="./assets/parrot-leg-left.png" alt="Left Leg" class="parrot__leg parrot__leg--left">
-    <img src="./assets/parrot-leg-right.png" alt="Right Leg" class="parrot__leg parrot__leg--right">
-    <img src="./assets/parrot-without-legs.png" alt="Me" class="parrot__body">
-  </div>
+<div class="me" class:jump class:running class:staticPosition>
+	{#if !staticPosition}
+  	<div class="shadow"></div>
+	{/if}
+	{#if visible}
+		<div class="parrot" transition:fly={{y:-200, duration: 800}} style={`transition-duration: ${jumpDuration}`}>
+			<img src="./assets/parrot-leg-left.png" alt="Left Leg" class="parrot__leg parrot__leg--left">
+			<img src="./assets/parrot-leg-right.png" alt="Right Leg" class="parrot__leg parrot__leg--right">
+			<img src="./assets/parrot-without-legs.png" alt="Me" class="parrot__body">
+		</div>
+	{/if}
 </div>
 
 <style lang="scss">
@@ -19,6 +25,10 @@
 		position: absolute;
 		top: 450px;
 		left: 100px;
+	}
+
+	.me.staticPosition {
+		position: static;
 	}
 
 	@media screen and (max-width: 600px) {
@@ -35,6 +45,32 @@
 		transition: transform 200ms ease;
 	}
 
+	@keyframes stand {
+		10% {
+			transform: rotate(-5deg)
+		}
+
+		20% {
+			transform: rotate(5deg)
+		}
+		
+		80% {
+			transform: rotate(5deg)
+		}
+
+		90% {
+			transform: rotate(-5deg);
+		}
+
+		100% {
+			transform: rotate(0deg);
+		}
+	}
+
+	.me.staticPosition .parrot__body {
+		animation: stand 3s infinite ease;
+	}
+
 	.me.running .parrot__body {
 		transform: rotate(10deg);
 	}
@@ -49,7 +85,6 @@
 		transform: translateY(0);
 		transition-property: transform;
 		transition-timing-function: ease;
-		transition-duration: var(--jumpDuration);
 	}
 
 	.me.jump .parrot {
@@ -57,11 +92,11 @@
 	}
 
 	@keyframes walk {
-		0% {
+		from {
 			transform: rotate(60deg);
 		}
 
-		100% {
+		to {
 			transform: rotate(-30deg);
 		}
 	}

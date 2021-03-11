@@ -1,9 +1,8 @@
 <script>
-	import { fly, blur } from "svelte/transition";
+	import { blur } from "svelte/transition";
 	import Parrot from "./Parrot.svelte";
 	import Meta from "./Meta.svelte";
 	import Welcome from "./Welcome.svelte";
-	import Loading from "./Loading.svelte";
 	import PauseButton from "./PauseButton.svelte";
 
 	let fps = 60;
@@ -68,8 +67,6 @@
 	}
 	
 	function handleKeydown(e) {
-		e.preventDefault();
-
 		if (jumpKeys.includes(e.key)) {
 			triggerJump(e);
 		} else if (stopKeys.includes(e.key)) {
@@ -79,6 +76,10 @@
 
 	function triggerJump(e) {
 		e.preventDefault();
+
+		if (!playing || !gameActive) {
+			return;
+		}
 
 		if (!running) {
 			startRunning();
@@ -100,30 +101,26 @@
 	class:running
 	class:gameActive
 	>
-	{#if loading}
-		<Loading startGame={startGame} worldBG={worldBG}/>
-	{:else if playing}
-		<div
-			id="stage"
-			tabindex="0"
-			class="stage"
-			style={`background-image:url(${worldBG})`}
-			in:fly="{{ y: -200, duration: startGameAnimationDuration }}"
-			on:keydown={handleKeydown}
-			on:click={triggerJump}
-		>
-			<Meta position={position} pixelPerBlock={pixelPerBlock}/>
-			<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
+	<div
+		id="stage"
+		tabindex="0"
+		class="stage"
+		style={`background-image:url(${worldBG})`}
+		on:keydown={handleKeydown}
+		on:click={triggerJump}
+	>
+		<Meta position={position} pixelPerBlock={pixelPerBlock}/>
+		<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState} visible={gameActive}/>
+	</div>
+	{#if playing && !gameActive && !isMobile()}
+		<div class="help" transition:blur>
+			Press [Space] or [🠕] to jump and run<br>
+			Press [ESC] to pause
 		</div>
-		{#if !gameActive && !isMobile()}
-			<div class="help" transition:blur>
-				Press [Space] or [🠕] to jump and run<br>
-				Press [ESC] to pause
-			</div>
-		{/if}
+	{/if}
 		<PauseButton handleClick={pause}/>
-	{:else}
-		<Welcome loadGame={loadGame}/>
+	{#if !playing}
+		<Welcome loadGame={loadGame} loading={loading} startGame={startGame} worldBG={worldBG}/>
 	{/if}
 </main>
 
