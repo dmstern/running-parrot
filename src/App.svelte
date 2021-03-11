@@ -87,6 +87,10 @@
 		}
 	}
 
+	function isMobile() {
+		return window.innerWidth < 600;
+	}
+
 </script>
 
 <main
@@ -110,8 +114,11 @@
 			<Meta position={position} pixelPerBlock={pixelPerBlock}/>
 			<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState}/>
 		</div>
-		{#if !gameActive}
-			<div class="help" transition:blur>Press ["w"] or [🠕] to jump and run</div>
+		{#if !gameActive && !isMobile()}
+			<div class="help" transition:blur>
+				Press ["w"] or [🠕] to jump and run<br>
+				Press [ESC] to pause
+			</div>
 		{/if}
 		<PauseButton handleClick={stopRunning}/>
 	{:else}
