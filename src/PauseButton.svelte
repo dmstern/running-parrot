@@ -1,10 +1,10 @@
 <script>
-  import PlayIcon from "./icons/Play.svelte";
+  import PauseIcon from "./icons/Pause.svelte";
   export let handleClick;
 </script>
 
 <button on:click={handleClick}>
-  <PlayIcon/>
+  <PauseIcon/>
 </button>
 
 <style>
@@ -18,6 +18,7 @@ button {
   width: 3rem;
   height: 3rem;
   color: white;
+  font-size: 1.5rem;
 }
 
 </style>
