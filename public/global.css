@@ -74,5 +74,6 @@ button:not(:disabled):active {
 }
 
 button:focus {
-  border-color: #666;
+  border-color: #ffffff;
+  border-width: 3px;
 }
