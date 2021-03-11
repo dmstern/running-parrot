@@ -90,8 +90,10 @@
 		}
 	}
 
-	function isMobile() {
-		return window.innerWidth < 600;
+	function isTouchDevice() {
+  	return (('ontouchstart' in window) ||
+     (navigator.maxTouchPoints > 0) ||
+     (navigator.msMaxTouchPoints > 0));
 	}
 
 </script>
@@ -112,10 +114,14 @@
 		<Meta position={position} pixelPerBlock={pixelPerBlock}/>
 		<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState} visible={gameActive}/>
 	</div>
-	{#if playing && !gameActive && !isMobile()}
+	{#if playing && !gameActive}
 		<div class="help" transition:blur>
-			Press [Space] or [🠕] to jump and run<br>
-			Press [ESC] to pause
+			{#if isTouchDevice()}
+				Touch on the screen to jump and run
+			{:else}
+				Press [Space] or [🠕] to jump and run<br>
+				Press [ESC] to pause
+			{/if}
 		</div>
 	{/if}
 		<PauseButton handleClick={pause}/>
