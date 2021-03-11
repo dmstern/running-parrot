@@ -20,6 +20,7 @@
 	let loading = false;
 	let worldBG = "../assets/minecraft-bg.png";
 	let startGameAnimationDuration = 2000;
+	let gameStarted = false;
 
 	let jumpKeys = ["ArrowUp", " "];
 	let stopKeys = ["Escape", "ArrowLeft"];
@@ -31,6 +32,7 @@
 	function startGame() {
 		loading = false;
 		playing = true;
+		gameStarted = true;
 
 		setTimeout(() => {
 			stage.focus();
@@ -65,6 +67,10 @@
 		gameActive = false;
 		running = false;
 		clearInterval(interval);
+	}
+
+	function restartGame() {
+		location.reload();
 	}
 	
 	function handleKeydown(e) {
@@ -128,7 +134,7 @@
 	{/if}
 		<PauseButton handleClick={pause}/>
 	{#if !playing}
-		<Welcome loadGame={loadGame} loading={loading} startGame={startGame} worldBG={worldBG} position={position} pixelPerBlock={pixelPerBlock}/>
+		<Welcome loadGame={loadGame} loading={loading} startGame={startGame} worldBG={worldBG} position={position} pixelPerBlock={pixelPerBlock} gameStarted={gameStarted} restartGame={restartGame}/>
 	{/if}
 </main>
 
@@ -159,10 +165,9 @@
 		animation-timing-function: linear;
 		animation-duration: 6s;
 		animation-iteration-count: infinite;
-		animation-fill-mode: forwards;
 		animation-play-state: paused;
 	}
-	
+
 	main.running.gameActive,
 	.running.gameActive .stage {
 		animation-play-state: running;

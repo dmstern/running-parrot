@@ -9,17 +9,17 @@
 <style>
 
 button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background: transparent;
-    border: none;
-    width: 3rem;
-    height: 3rem;
-  }
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: transparent;
+  border: none;
+  width: 3rem;
+  height: 3rem;
+}
 
-  .icon-pause {
-    color: white;
-  }
+.icon-pause {
+  color: white;
+}
 
 </style>

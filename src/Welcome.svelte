@@ -9,6 +9,8 @@
   export let worldBG;
   export let pixelPerBlock;
   export let position;
+  export let gameStarted;
+  export let restartGame;
 </script>
 
 <div class="welcome-screen" in:fly={{y: -500, duration: 1000, delay: 1000}} out:fly={{y: -500, duration: 1000}}>
@@ -17,11 +19,18 @@
   {:else}
     <div class="welcome-screen__main" out:blur={{duration:1000}}>
       <h1>Running Parrot</h1>
+      {#if gameStarted}
       <div class="meta">
         <Meta position={position} pixelPerBlock={pixelPerBlock}/>
       </div>
+      {/if}
       <Parrot staticPosition={true}/>
-      <button class="btn-start" on:click={loadGame}>Play</button>
+      <div class="buttons">
+        {#if gameStarted}
+        <button class="btn btn-restart" on:click={restartGame}>Restart</button>
+        {/if}
+        <button class="btn btn-play" on:click={loadGame}>{#if gameStarted}Resume{:else}Start{/if}</button>
+      </div>
     </div>
   {/if}
 </div>
@@ -48,10 +57,21 @@
     padding: 20px;
   }
 
-  .btn-start {
+  .buttons {
+    display: flex;
+  }
+
+  .btn {
     width: 150px;
     height: 60px;
     font-size: 1.5rem;
+    border-width: 3px;
+  }
+
+  .btn-restart {
+    background-color: transparent;
+    color: white;
+    margin-right: 1em;
   }
 
   .welcome-screen__main {
