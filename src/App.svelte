@@ -4,7 +4,7 @@
 	import Meta from "./Meta.svelte";
 	import Welcome from "./Welcome.svelte";
 	import Loading from "./Loading.svelte";
-	import PauseButton from "./PauseButton.svelte";
+	// import PauseButton from "./PauseButton.svelte";
 
 	let fps = 60;
 	let playing = false;
@@ -22,7 +22,7 @@
 	let startGameAnimationDuration = 2000;
 
 	let jumpKeys = ["ArrowUp", " "];
-	let stopKeys = ["Escape", "ArrowLeft"];
+	// let stopKeys = ["Escape", "ArrowLeft"];
 
 	function loadGame() {
 		loading = true;
@@ -60,18 +60,18 @@
 		setTimeout(dip, Number.parseInt(jumpDuration, 10))
 	}
 
-	function stopRunning() {
-		running = false;
-		clearInterval(interval);
-	}
+	// function stopRunning() {
+	// 	running = false;
+	// 	clearInterval(interval);
+	// }
 	
 	function handleKeydown(e) {
 		e.preventDefault();
 
 		if (jumpKeys.includes(e.key)) {
 			triggerJump(e);
-		} else if (stopKeys.includes(e.key)) {
-			stopRunning();
+		// } else if (stopKeys.includes(e.key)) {
+			// stopRunning();
 		}
 	}
 
@@ -116,10 +116,10 @@
 		{#if !gameActive && !isMobile()}
 			<div class="help" transition:blur>
 				Press [Space] or [🠕] to jump and run<br>
-				Press [ESC] to pause
+				<!-- Press [ESC] to pause -->
 			</div>
 		{/if}
-		<PauseButton handleClick={stopRunning}/>
+		<!-- <PauseButton handleClick={stopRunning}/> -->
 	{:else}
 		<Welcome loadGame={loadGame}/>
 	{/if}
