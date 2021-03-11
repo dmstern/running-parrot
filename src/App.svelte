@@ -116,7 +116,7 @@
 		</div>
 		{#if !gameActive && !isMobile()}
 			<div class="help" transition:blur>
-				Press ["w"] or [🠕] to jump and run<br>
+				Press [Space] or [🠕] to jump and run<br>
 				Press [ESC] to pause
 			</div>
 		{/if}
