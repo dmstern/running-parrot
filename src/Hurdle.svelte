@@ -6,8 +6,13 @@
   let h = height * 32;
 </script>
 
-<div class="hurdle" style={`height: ${h}px; transform: translateX(${spawnPosition-position}px); top: ${400 + (120 - h)}px`}>
-
+<div
+  class="hurdle"
+  style={`
+    height: ${h}px;
+    transform: translateX(${spawnPosition - position}px);
+    top: ${400 + (120 - h)}px
+  `}>
 </div>
 
 <style>
