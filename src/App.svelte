@@ -1,10 +1,12 @@
 <script>
 	import { blur } from "svelte/transition";
+	import { afterUpdate } from 'svelte';
 	import Parrot from "./Parrot.svelte";
 	import Meta from "./Meta.svelte";
 	import Welcome from "./Welcome.svelte";
 	import PauseButton from "./PauseButton.svelte";
 	import LoadingAnimation from "./LoadingAnimation.svelte";
+	import Hurdle from "./Hurdle.svelte";
 
 	let fps = 60;
 	let playing = false;
@@ -103,6 +105,25 @@
      (navigator.msMaxTouchPoints > 0));
 	}
 
+	let hurdles = [];
+
+	afterUpdate(() => {
+		let spawnInterval = Math.round(Math.random() * 2000);
+
+		if (position % spawnInterval !== 0) {
+			return;
+		}
+
+		let height = Math.round(Math.random() * 4);
+
+		let newHurdle = {
+			height,
+			spawnPosition: position
+		};
+
+		hurdles.push(newHurdle);
+	});
+
 </script>
 
 <main
@@ -119,6 +140,13 @@
 		on:click={triggerJump}
 	>
 		<Meta position={position} pixelPerBlock={pixelPerBlock}/>
+
+		<div class="hurdles">
+			{#each hurdles as hurdle}
+				<Hurdle height={hurdle.height} position={position} spawnPosition={hurdle.spawnPosition}/>
+			{/each}
+		</div>
+			
 		<Parrot
 			jumpDuration={jumpDuration}
 			running={running}
@@ -193,8 +221,15 @@
 		}
 
 		to {
-			background-position-x: -3840px;
+			background-position-x: -3840px; /* 640px/s */
 		}
+	}
+
+	.hurdles {
+		position: relative;
+		width: 100%;
+		display: block;
+		height: calc(100% - 32px);
 	}
 
 	.help {
@@ -210,6 +245,7 @@
 	main {
 		max-width: 100%;
 		margin: 0;
+		overflow: hidden;
 		height: 100%;
 		background: url("../assets/minecraft-cleanstone.jpg");
 		position: relative;
