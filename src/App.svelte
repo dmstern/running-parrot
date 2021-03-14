@@ -143,7 +143,11 @@
 
 		<div class="hurdles">
 			{#each hurdles as hurdle}
-				<Hurdle height={hurdle.height} position={position} spawnPosition={hurdle.spawnPosition}/>
+				<Hurdle
+					height={hurdle.height}
+					position={position}
+					spawnPosition={hurdle.spawnPosition}
+				/>
 			{/each}
 		</div>
 			
