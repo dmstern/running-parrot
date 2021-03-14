@@ -119,7 +119,12 @@
 		on:click={triggerJump}
 	>
 		<Meta position={position} pixelPerBlock={pixelPerBlock}/>
-		<Parrot jumpDuration={jumpDuration} running={running} jump={jumpState} visible={gameActive}/>
+		<Parrot
+			jumpDuration={jumpDuration}
+			running={running}
+			jump={jumpState}
+			visible={gameActive}
+		/>
 	</div>
 	{#if playing && !gameActive}
 		<div class="help" transition:blur={{duration:500}}>
@@ -134,7 +139,16 @@
 	{/if}
 		<PauseButton handleClick={pause}/>
 	{#if !playing}
-		<Welcome loadGame={loadGame} loading={loading} startGame={startGame} worldBG={worldBG} position={position} pixelPerBlock={pixelPerBlock} gameStarted={gameStarted} restartGame={restartGame}/>
+		<Welcome
+			loadGame={loadGame}
+			loading={loading}
+			startGame={startGame}
+			worldBG={worldBG}
+			position={position}
+			pixelPerBlock={pixelPerBlock}
+			gameStarted={gameStarted}
+			restartGame={restartGame}
+		/>
 	{/if}
 </main>
 
