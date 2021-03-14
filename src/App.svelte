@@ -61,7 +61,7 @@
 		jumpState = true;
 		isJumping = true;
 
-		setTimeout(dip, Number.parseInt(jumpDuration, 10))
+		setTimeout(dip, Number.parseInt(jumpDuration, 10));
 	}
 
 	function pause() {
